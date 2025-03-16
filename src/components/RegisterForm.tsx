@@ -1,14 +1,15 @@
 import { useState } from "react";
 import { useAuth } from "../context/AuthContext";
 
-const LoginForm = () => {
-  const { handleLogin } = useAuth();
+const RegisterForm = () => {
+  const { handleRegister } = useAuth();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
 
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
-    handleLogin(username, password);
+    handleRegister(username, password, email);
   };
 
   return (
@@ -32,6 +33,18 @@ const LoginForm = () => {
         />
       </div>
       <div className="mb-4">
+        <label htmlFor="email" className="block text-gray-700 font-bold mb-2">
+          Email:
+        </label>
+        <input
+          type="email"
+          id="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
+      </div>
+      <div className="mb-4">
         <label
           htmlFor="password"
           className="block text-gray-700 font-bold mb-2"
@@ -50,16 +63,16 @@ const LoginForm = () => {
         type="submit"
         className="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600"
       >
-        Login
+        Register
       </button>
       <p className="mt-4 text-center text-gray-600">
-        No account yet?{" "}
-        <a href="/register" className="text-blue-500 hover:underline">
-          Register
+        Already have an account?{" "}
+        <a href="/login" className="text-blue-500 hover:underline">
+          Login
         </a>
       </p>
     </form>
   );
 };
 
-export default LoginForm;
+export default RegisterForm;
